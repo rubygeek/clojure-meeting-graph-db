@@ -1,36 +1,20 @@
 # clojure-meeting-datascript
 
-FIXME: description
+## Resources
 
-## Installation
+* https://vvvvalvalval.github.io/posts/2018-07-23-datascript-as-a-lingua-franca-for-domain-modeling.html
 
-Download from http://example.com/FIXME.
+* datascript tutorial - http://udayv.com/clojurescript/clojure/2016/04/28/datascript101-chapter1-initializing-inserting-and-querying-records/
 
-## Usage
+* datascript api for JS - https://github.com/kristianmandrup/datascript-tutorial/blob/master/javascript_api.md
 
-FIXME: explanation
+* Learn Datalog - http://www.learndatalogtoday.org/
 
-    $ java -jar clojure-meeting-datascript-0.1.0-standalone.jar [args]
 
-## Options
+## Things to try 
 
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
-
-Copyright © 2019 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+* try some datalog
+* create the same dataset in both asami and datascript
+* create a todo list
+* find all items that are not done yet
+* implement the dataset needed to do the queries for Learn Datalog today
