@@ -1,31 +1,22 @@
-(ns clojure-meeting-datascript.core
-  (:require []
-            [asami.core :as a])
-  (:gen-class))
+(ns clojure-meeting-asami.core
+  (:require [asami.core :as a]
+            [naga.store :as store]
+            [naga.store-registry :as r]))
 
 
-(def schema { :person/name {:db/cardinality :db.cardinality/one
-                            :db/valueType   :db.type/string
-                            :db/doc         "A person's name"}
-             
-              :person/age  {:db/cardinality :db.cardinality/one
-                            :db/valueType   :db.type/string
-                            :db/doc         "A person's age"}})
+(def store (r/get-storage-handle {:type :memory}))
 
-(def conn (d/create-conn))
+(let [id1 (store/new-node store)
+      id2 (store/new-node store)]
 
+  ;; No entities like DS  
+  (def datoms [[id1 :name "Bob"]
+               [id1 :age 30]
+               [id2 :name "Sally"]
+               [id2 :age 15]]))
 
-(def conn (d/create-conn schema))
+(def db (store/assert-data store datoms))
 
-;; Define datoms to transact
-(def datoms [{:db/id -1 :name "Bob" :age 30}
-             {:db/id -2 :name "Sally" :age 15}])
-
-;;; Add the datoms via transaction
-(d/transact! conn datoms)
-
-
-;;; Query to find names for entities (people) whose age is less than 18
 (def q-young '[:find ?n
                :in $ ?min-age
                :where
@@ -33,8 +24,4 @@
                [?e :age ?a]
                [(< ?a ?min-age)]])
 
-;; execute query: q-young, passing 18 as min-age
-(d/q q-young @conn 18)
-
-
-
+(a/q q-young db 18)
